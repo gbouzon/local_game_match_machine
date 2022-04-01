@@ -7,7 +7,7 @@
     android:background="#09094f"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    tools:context=".MainActivity">
+    tools:context=".Register">
 
     <TextView
         android:layout_width="wrap_content"

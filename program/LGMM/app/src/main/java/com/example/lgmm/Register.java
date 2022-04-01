@@ -13,22 +13,27 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
-public class MainActivity extends AppCompatActivity {
+public class Register extends AppCompatActivity {
+
+    EditText email;
+    EditText username;
+    EditText password;
+    EditText confirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        EditText email = findViewById(R.id.emailField);
-        EditText username = findViewById(R.id.usernameField);
-        EditText password = findViewById(R.id.passwordField);
-        EditText confirm = findViewById(R.id.confirmField);
+        setContentView(R.layout.register);
+        email = findViewById(R.id.emailField);
+        username = findViewById(R.id.usernameField);
+        password = findViewById(R.id.passwordField);
+        confirm = findViewById(R.id.confirmField);
         Button registerButton = findViewById(R.id.registerButton);
         DAOUser dao = new DAOUser();
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!password.getText().toString().equals(confirm.getText().toString()))
+                if (!password.getText().toString().equals(confirm.getText().toString()) && !fieldsComplete())
                     Toast.makeText(getApplicationContext(), "Passwords do not match. Please try again", Toast.LENGTH_LONG).show();
                 else {
                     try {
@@ -54,5 +59,13 @@ public class MainActivity extends AppCompatActivity {
         MessageDigest md = MessageDigest.getInstance("SHA-512");
         md.update(salt);
         return md.digest(password.getBytes(StandardCharsets.UTF_8)).toString();
+    }
+
+    public boolean fieldsComplete() {
+        if (email.getText().toString().equals("") || username.getText().toString().equals("") ||
+        password.getText().toString().equals("")) {
+            return false;
+        }
+        return true;
     }
 }
