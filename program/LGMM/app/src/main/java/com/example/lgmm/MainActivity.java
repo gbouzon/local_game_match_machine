@@ -33,13 +33,13 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     try {
                         User user = new User(email.getText().toString(), username.getText().toString(),
-                                passwordHash(password.getText().toString()));
+                                /*passwordHash(*/password.getText().toString()/*)*/);
                         dao.add(user).addOnSuccessListener(suc -> {
                             Toast.makeText(getApplicationContext(), "Registration Complete", Toast.LENGTH_SHORT).show();
                         }).addOnFailureListener(er -> {
                             Toast.makeText(getApplicationContext(), "" + er.getMessage(), Toast.LENGTH_SHORT).show();
                         });
-                    } catch (NoSuchAlgorithmException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
