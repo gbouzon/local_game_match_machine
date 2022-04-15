@@ -56,7 +56,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    Picasso.get().load(Uri.parse(snapshot.child(mAuth.getUid()).child("profileImage")
+                    if (snapshot.child(mAuth.getUid()).child("profileImage").getValue(String.class) != null)
+                        Picasso.get().load(Uri.parse(snapshot.child(mAuth.getUid()).child("profileImage")
                             .getValue(String.class))).into(profileButton);
                 }
             }
@@ -96,6 +97,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void handleOnBackPressed() {
                 mAuth.signOut();
+                logout();
                 startActivity(new Intent(HomeActivity.this, MainActivity.class));
             }
         };
@@ -154,6 +156,22 @@ public class HomeActivity extends AppCompatActivity {
         }
         else {
             startActivity(new Intent(HomeActivity.this, CometChatUI.class));
+        }
+    }
+
+    private void logout() {
+        if (CometChat.getLoggedInUser() != null) {
+            CometChat.logout(new CometChat.CallbackListener<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    Toast.makeText(HomeActivity.this, "User successfully logged out.", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onError(CometChatException e) {
+
+                }
+            });
         }
     }
 }

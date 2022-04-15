@@ -217,8 +217,9 @@ public class CreateUserActivity extends AppCompatActivity {
                 }
             });
         } else {
+            createUser(null);
             progressDialog.dismiss();
-            Toast.makeText(this, "Image not selected", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Image not selected", Toast.LENGTH_SHORT).show();
         }
     }
 }
