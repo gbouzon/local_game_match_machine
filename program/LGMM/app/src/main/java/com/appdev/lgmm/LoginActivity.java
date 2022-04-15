@@ -1,5 +1,6 @@
 package com.appdev.lgmm;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -50,6 +51,14 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser();
             }
         });
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     private void loginUser() {

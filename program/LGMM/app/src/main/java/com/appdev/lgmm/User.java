@@ -7,6 +7,7 @@ public class User {
     private String userID;
     private String username;
     private String email;
+    private boolean status;
     private String profileImage;
     private Date dateCreated;
 
@@ -18,6 +19,7 @@ public class User {
         this.userID = userID;
         this.username = username;
         this.email = email;
+        status = true;
         profileImage = null;
         dateCreated = Calendar.getInstance().getTime();
     }
@@ -44,6 +46,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public String getProfileImage() {

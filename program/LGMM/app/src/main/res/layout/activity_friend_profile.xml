@@ -6,6 +6,11 @@
     android:orientation="vertical"
     android:background="@color/darkBlue">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
@@ -14,8 +19,7 @@
         android:textSize="34sp"
         android:textStyle="bold"
         android:textAlignment="center"
-        android:textColor="@color/white"
-        android:layout_marginTop="40dp"/>
+        android:textColor="@color/white"/>
 
     <View
         android:layout_width="match_parent"
@@ -80,7 +84,9 @@
             android:layout_height="wrap_content"
             android:hint="Bio"
             android:inputType="textMultiLine"
-            android:background="@drawable/rounded_corners"
+            android:enabled="false"
+            android:background="@drawable/small_rounded_corners"
+            android:backgroundTint="@color/grey_100"
         />
     </com.google.android.material.textfield.TextInputLayout>
 

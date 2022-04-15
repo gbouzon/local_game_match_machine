@@ -1,5 +1,6 @@
 package com.appdev.lgmm;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -58,6 +59,15 @@ public class MainActivity extends AppCompatActivity {
                 signInWithProvider(OAuthProvider.newBuilder("google.com").build());
             }
         });
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                finish();
+                System.exit(0);
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     private void signInWithProvider(OAuthProvider build) {

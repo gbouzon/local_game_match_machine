@@ -1,5 +1,6 @@
 package com.appdev.lgmm;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -51,6 +52,14 @@ public class RegisterActivity extends AppCompatActivity {
                 createNewUser();
             }
         });
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     private void createNewUser() {

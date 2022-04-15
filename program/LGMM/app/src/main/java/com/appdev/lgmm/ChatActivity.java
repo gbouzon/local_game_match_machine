@@ -1,5 +1,6 @@
 package com.appdev.lgmm;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -22,7 +23,6 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
 
         appSettings = new AppSettings.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(region).build();
 
@@ -40,6 +40,14 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
         startActivity(new Intent(ChatActivity.this, CometChatUI.class));
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                startActivity(new Intent(ChatActivity.this, HomeActivity.class));
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
 
     }
 }

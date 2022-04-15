@@ -1,5 +1,6 @@
 package com.appdev.lgmm;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -83,6 +84,14 @@ public class CreateUserActivity extends AppCompatActivity {
         });
 
         getUserInfo();
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                Toast.makeText(CreateUserActivity.this, "Please complete your account", Toast.LENGTH_SHORT).show();
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     private void getUserInfo() {

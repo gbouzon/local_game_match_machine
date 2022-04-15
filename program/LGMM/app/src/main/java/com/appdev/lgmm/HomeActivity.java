@@ -1,5 +1,6 @@
 package com.appdev.lgmm;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,7 +19,6 @@ public class HomeActivity extends AppCompatActivity {
     TextView chatButton;
     CircleImageView profileButton;
     Button nearby;
-    Button logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +51,13 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        logout = findViewById(R.id.logoutButton);
-        logout.setOnClickListener(new View.OnClickListener() {
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
-            public void onClick(View view) {
+            public void handleOnBackPressed() {
                 mAuth.signOut();
                 startActivity(new Intent(HomeActivity.this, MainActivity.class));
             }
-        });
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
     }
 }

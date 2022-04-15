@@ -8,13 +8,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-public class NearbyPlayersActivity extends AppCompatActivity {
+public class FriendProfileActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nearby_players);
+        setContentView(R.layout.activity_friend_profile);
         toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_backbutton);
         setSupportActionBar(toolbar);
@@ -22,7 +22,7 @@ public class NearbyPlayersActivity extends AppCompatActivity {
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
-                startActivity(new Intent(NearbyPlayersActivity.this, HomeActivity.class));
+                startActivity(new Intent(FriendProfileActivity.this, ChatActivity.class));
             }
         };
         getOnBackPressedDispatcher().addCallback(this, callback);
@@ -30,9 +30,7 @@ public class NearbyPlayersActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        startActivity(new Intent(NearbyPlayersActivity.this, HomeActivity.class));
+        startActivity(new Intent(FriendProfileActivity.this, ChatActivity.class));
         return super.onOptionsItemSelected(item);
     }
-
-
 }

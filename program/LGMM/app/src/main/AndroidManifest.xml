@@ -14,6 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LGMM">
         <activity
+            android:name=".FriendProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
