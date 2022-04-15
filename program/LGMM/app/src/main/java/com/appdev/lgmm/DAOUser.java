@@ -25,7 +25,6 @@ public class DAOUser {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         databaseReference = db.getReference(User.class.getSimpleName());
         mAuth = FirebaseAuth.getInstance();
-        //db.setPersistenceEnabled(false);
         user = new User();
     }
 

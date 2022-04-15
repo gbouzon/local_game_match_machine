@@ -30,16 +30,7 @@ public class ChatActivity extends AppCompatActivity {
 
         initCometChat();
         login();
-        /**
-        if (getIntent().getStringExtra("cometUID") != null) {
-            cometUserID = getIntent().getStringExtra("cometUID");
-            Toast.makeText(getApplicationContext(), "cometUID: " + cometUserID, Toast.LENGTH_LONG).show();
-            login();
-        }
-        else {
-            Toast.makeText(ChatActivity.this, "Could not retrieve user.", Toast.LENGTH_SHORT).show();
-        }
-         */
+
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
@@ -48,7 +39,6 @@ public class ChatActivity extends AppCompatActivity {
             }
         };
         getOnBackPressedDispatcher().addCallback(this, callback);
-
     }
 
     private void initCometChat() {
@@ -59,11 +49,11 @@ public class ChatActivity extends AppCompatActivity {
             public void onSuccess(String successMessage) {
                 UIKitSettings.setAuthKey(Constants.AUTH_KEY);
                 CometChat.setSource("uikit","android","java");
-                Toast.makeText(getApplicationContext(), "comet init: success ", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "comet init: success ", Toast.LENGTH_LONG).show();
             }
             @Override
             public void onError(CometChatException e) {
-                Toast.makeText(getApplicationContext(), "comet init: error " + e.getDetails(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "comet init: error " + e.getDetails(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -78,7 +68,7 @@ public class ChatActivity extends AppCompatActivity {
 
                 @Override
                 public void onError(CometChatException e) {
-                    Toast.makeText(getApplicationContext(), "comet login: error " + e.getDetails(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "comet login: error " + e.getDetails(), Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -86,5 +76,4 @@ public class ChatActivity extends AppCompatActivity {
             startActivity(new Intent(ChatActivity.this, CometChatUI.class));
         }
     }
-
 }

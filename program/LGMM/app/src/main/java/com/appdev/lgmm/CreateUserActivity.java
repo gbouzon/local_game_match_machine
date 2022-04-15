@@ -80,9 +80,8 @@ public class CreateUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //uploadProfileImage();
-                //User u = createUser();
+                createUser();
                 Intent intent = new Intent(CreateUserActivity.this, HomeActivity.class);
-                //intent.putExtra("cometUID", u.getUserID());
                 startActivity(intent);
             }
         });
@@ -106,12 +105,11 @@ public class CreateUserActivity extends AppCompatActivity {
         getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
-    private User createUser() {
+    private void createUser() {
         DAOUser db = new DAOUser();
         User user = new User(mAuth.getUid(), username.getText().toString(), email.getText().toString());
         db.add(user);
         createCometUser(user);
-        return user;
     }
 
     private void initCometChat() {
