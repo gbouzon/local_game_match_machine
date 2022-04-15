@@ -2,6 +2,7 @@ package com.appdev.lgmm;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.activity.OnBackPressedDispatcher;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -16,29 +17,50 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
     private Button editProfile;
     private Toolbar toolbar;
     private TextView username;
     private TextInputEditText bio;
-    private Object Menu;
-    private DAOUser db;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        db = new DAOUser();
-        User user = db.getCurrentUser();
-        Log.i("user", user.toString());
+        mAuth = FirebaseAuth.getInstance();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User");
+        String key = mAuth.getUid();
 
         username = findViewById(R.id.usernameTextView);
-        username.setText(user.getUsername());
-
         bio = findViewById(R.id.bioTextInput);
-        bio.setText(user.getBio());
+
+        Query retrieveUser = databaseReference.orderByChild("userID").equalTo(key);
+        retrieveUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    Log.i("snapshot", snapshot.getValue(String.class));
+                    username.setText(snapshot.child("username").getValue(String.class));
+                    Log.i("username", username.getText().toString());
+                    bio.setText(snapshot.child("bio").getValue(String.class));
+                    Log.i("bio", bio.getText().toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
         editProfile = findViewById(R.id.editProfileButton);
         editProfile.setOnClickListener(new View.OnClickListener() {
