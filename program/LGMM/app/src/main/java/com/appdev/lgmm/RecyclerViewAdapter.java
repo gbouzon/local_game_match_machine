@@ -38,7 +38,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @NonNull
     @Override
     public RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.nearby_friend_row, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_nearby_player, parent, false);
         return new ViewHolder(view);
     }
 

@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LGMM">
         <activity
-            android:name=".NearbyFriendsActivity"
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NearbyPlayersActivity"
             android:exported="false" />
         <activity
             android:name=".CreateUserActivity"

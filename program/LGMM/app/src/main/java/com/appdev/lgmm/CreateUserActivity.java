@@ -110,7 +110,7 @@ public class CreateUserActivity extends AppCompatActivity {
 
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             //imageUri = CropImage.getPickImageResultUriContent(getApplicationContext(), data);
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            //CropImage.ActivityResult result = CropImage.getActivityResult(data);
 
             imageUri = CropImage.getPickImageResultUriContent(getApplicationContext(), data);
 //            String uri = imageUri.toString();

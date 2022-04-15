@@ -55,4 +55,5 @@ dependencies {
     implementation 'com.github.CanHub:Android-Image-Cropper:3.3.6' //added this
     implementation 'com.google.firebase:firebase-storage:20.0.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
 }

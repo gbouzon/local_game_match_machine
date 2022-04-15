@@ -6,15 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.cometchat.pro.uikit.ui_components.cometchat_ui.CometChatUI;
 import com.google.firebase.auth.FirebaseAuth;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class HomeActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
+    TextView chatButton;
+    CircleImageView profileButton;
+    Button nearby;
     Button logout;
-    Button chat;
-    Button profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,27 +26,37 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         mAuth = FirebaseAuth.getInstance();
-        logout = findViewById(R.id.logoutButton);
-        chat = findViewById(R.id.chatButton);
-        profile = findViewById(R.id.createProfileButton);
-        logout.setOnClickListener(new View.OnClickListener() {
+
+        profileButton = findViewById(R.id.profileButton);
+        profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAuth.signOut();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
             }
         });
-        chat.setOnClickListener(new View.OnClickListener() {
+
+        chatButton = findViewById(R.id.chatButton);
+        chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(HomeActivity.this, ChatActivity.class));
             }
         });
 
-        profile.setOnClickListener(new View.OnClickListener() {
+        nearby = findViewById(R.id.nearbyPlayersButton);
+        nearby.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this, CreateUserActivity.class));
+                startActivity(new Intent(HomeActivity.this, NearbyPlayersActivity.class));
+            }
+        });
+
+        logout = findViewById(R.id.logoutButton);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
+                startActivity(new Intent(HomeActivity.this, MainActivity.class));
             }
         });
     }
