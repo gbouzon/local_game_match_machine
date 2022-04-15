@@ -40,7 +40,6 @@ public class DAOUser {
     public Task<Void> delete(String key) {
         return databaseReference.child(key).removeValue();
     }
-<<<<<<< Updated upstream
 
     public User getCurrentUser() {
         String key = mAuth.getUid();
@@ -66,6 +65,4 @@ public class DAOUser {
         });
         return user;
     }
-=======
->>>>>>> Stashed changes
 }
