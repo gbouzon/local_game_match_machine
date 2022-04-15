@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
     TextView chatButton;
     CircleImageView profileButton;
     Button nearby;
+    String cometUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,15 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         mAuth = FirebaseAuth.getInstance();
+        cometUserID = mAuth.getUid();
         verifyUser();
+
+        /**
+        //figure out how to logout user from app (auth persistence) once app is closed.
+        if (getIntent().getStringExtra("cometUID") != null) {
+            cometUserID = getIntent().getStringExtra("cometUID");
+        }
+         */
 
         profileButton = findViewById(R.id.profileButton);
         profileButton.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +59,9 @@ public class HomeActivity extends AppCompatActivity {
         chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this, ChatActivity.class));
+                Intent intent = new Intent(HomeActivity.this, ChatActivity.class);
+                //intent.putExtra("cometUID", cometUserID );
+                startActivity(intent);
             }
         });
 

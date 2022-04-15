@@ -34,6 +34,11 @@ public class User {
         this.status = status;
         this.profileImage = profileImage;
         this.dateCreated = Calendar.getInstance().getTime();
+        this.dateCreated = Calendar.getInstance().getTime();
+    }
+
+    public User(User user) {
+        this(user.userID, user.username, user.email, user.bio, user.status, user.profileImage);
     }
 
     @Override

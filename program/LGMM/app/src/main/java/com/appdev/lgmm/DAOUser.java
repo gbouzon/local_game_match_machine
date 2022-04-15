@@ -19,11 +19,14 @@ import java.util.HashMap;
 public class DAOUser {
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
+    User user;
 
     public DAOUser() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         databaseReference = db.getReference(User.class.getSimpleName());
         mAuth = FirebaseAuth.getInstance();
+        //db.setPersistenceEnabled(false);
+        user = new User();
     }
 
     public Task<Void> add(User user) {
@@ -40,7 +43,6 @@ public class DAOUser {
     }
 
     public User getCurrentUser() {
-        User user = new User();
         String key = mAuth.getUid();
         Query retrieveUser = databaseReference.orderByChild("userID").equalTo(key);
         retrieveUser.addValueEventListener(new ValueEventListener() {
@@ -48,7 +50,7 @@ public class DAOUser {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     Log.i("UID", key);
-                     user = new User(key, snapshot.child("username").getValue(String.class),
+                      user = new User(key, snapshot.child("username").getValue(String.class),
                             snapshot.child("email").getValue(String.class),
                              snapshot.child("bio").getValue(String.class),
                              Boolean.parseBoolean(snapshot.child("status").getValue(String.class)),
