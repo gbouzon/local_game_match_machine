@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -79,23 +80,27 @@ public class CreateUserActivity extends AppCompatActivity {
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //uploadProfileImage();
+                uploadProfileImage();
                 createUser();
                 Intent intent = new Intent(CreateUserActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
-        /*
+
+        //starts picking the image
         profileImageView.setClickable(true);
         profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CropImage.activity().setAspectRatio(1,1).start(CreateUserActivity.this);
+                Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(openGalleryIntent, 1000);
             }
         });
 
         getUserInfo();
-        */
+
+
+
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
@@ -170,27 +175,13 @@ public class CreateUserActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            //imageUri = CropImage.getPickImageResultUriContent(getApplicationContext(), data);
-            //CropImage.ActivityResult result = CropImage.getActivityResult(data);
+        if (requestCode == 1000) {
+            if (resultCode == Activity.RESULT_OK) {
+                imageUri = data.getData();
+                profileImageView.setImageURI(imageUri);
 
-            imageUri = (Uri) CropImage.getPickImageResultUriContent(getApplicationContext(), data);
-//            String uri = imageUri.toString();
-//            uri = "file" + uri.substring(7);
-//            imageUri = Uri.parse(uri);
-
-            profileImageView.setImageURI(imageUri);
-            //Picasso.get().load(imageUri).into(profileImageView);
-//            Bitmap bm = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-//            profileImageView.setImageBitmap(bm);
-            Toast.makeText(this, imageUri.toString(), Toast.LENGTH_LONG).show();
-
-
-
-
-            //Picasso.get().load(imageUri).into(profileImageView);
-            //profileImageView.setImageURI(imageUri);
-
+                Toast.makeText(this, imageUri.toString(), Toast.LENGTH_LONG).show();
+            }
         } else {
             Toast.makeText(this, "Error, Try again", Toast.LENGTH_SHORT).show();
         }
