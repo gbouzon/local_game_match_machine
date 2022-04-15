@@ -52,7 +52,7 @@ dependencies {
     implementation project(path: ':uikit')
     implementation 'com.google.firebase:firebase-database:20.0.4'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
-    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+    implementation 'com.github.CanHub:Android-Image-Cropper:3.3.6' //added this
     implementation 'com.google.firebase:firebase-storage:20.0.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
 }

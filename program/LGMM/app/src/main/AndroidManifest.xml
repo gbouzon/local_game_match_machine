@@ -3,8 +3,8 @@
     package="com.appdev.lgmm">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +13,9 @@
         android:roundIcon="@mipmap/ic_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.LGMM">
+        <activity
+            android:name=".NearbyFriendsActivity"
+            android:exported="false" />
         <activity
             android:name=".CreateUserActivity"
             android:exported="false" />
@@ -28,6 +31,9 @@
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
+        <activity
+            android:name="com.canhub.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
