@@ -65,7 +65,7 @@ public class CreateUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_user);
 
         mAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
         storageProfilePicsRef = FirebaseStorage.getInstance().getReference().child("profilepic");
 
         profileImageView = findViewById(R.id.userImage);
@@ -81,7 +81,6 @@ public class CreateUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 uploadProfileImage();
-                createUser();
                 Intent intent = new Intent(CreateUserActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
@@ -110,9 +109,9 @@ public class CreateUserActivity extends AppCompatActivity {
         getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
-    private void createUser() {
+    private void createUser(String profileImage) {
         DAOUser db = new DAOUser();
-        User user = new User(mAuth.getUid(), username.getText().toString(), email.getText().toString());
+        User user = new User(mAuth.getUid(), username.getText().toString(), email.getText().toString(), "", profileImage);
         db.add(user);
         createCometUser(user);
     }
@@ -179,8 +178,6 @@ public class CreateUserActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 imageUri = data.getData();
                 profileImageView.setImageURI(imageUri);
-
-                Toast.makeText(this, imageUri.toString(), Toast.LENGTH_LONG).show();
             }
         } else {
             Toast.makeText(this, "Error, Try again", Toast.LENGTH_SHORT).show();
@@ -192,6 +189,7 @@ public class CreateUserActivity extends AppCompatActivity {
         progressDialog.setTitle("Set your profile");
         progressDialog.setMessage("Please wait, while we set your data");
         progressDialog.show();
+        DAOUser db = new DAOUser();
 
         if (imageUri != null) {
             final StorageReference fileRef = storageProfilePicsRef.child(mAuth.getCurrentUser().getUid() + ".jpg");
@@ -212,11 +210,7 @@ public class CreateUserActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
                         myUri = downloadUri.toString();
-
-                        HashMap<String, Object> userMap = new HashMap<>();
-                        userMap.put("image", myUri);
-
-                        databaseReference.child(mAuth.getCurrentUser().getUid()).updateChildren(userMap);
+                        createUser(myUri);
 
                         progressDialog.dismiss();
                     }

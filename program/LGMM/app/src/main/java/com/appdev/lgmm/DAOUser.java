@@ -28,8 +28,10 @@ public class DAOUser {
         user = new User();
     }
 
-    public Task<Void> add(User user) {
-        return databaseReference.push().setValue(user);
+    public void add(User user) {
+        DatabaseReference dbr = databaseReference.child(mAuth.getUid());
+        dbr.setValue(user);
+        dbr.push();
     }
 
     public Task<Void> update(HashMap<String, Object> hashMap) {
@@ -39,30 +41,5 @@ public class DAOUser {
 
     public Task<Void> delete(String key) {
         return databaseReference.child(key).removeValue();
-    }
-
-    public User getCurrentUser() {
-        String key = mAuth.getUid();
-        Query retrieveUser = databaseReference.orderByChild("userID").equalTo(key);
-        retrieveUser.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    Log.i("UID", key);
-                      user = new User(key, snapshot.child("username").getValue(String.class),
-                            snapshot.child("email").getValue(String.class),
-                             snapshot.child("bio").getValue(String.class),
-                             Boolean.parseBoolean(snapshot.child("status").getValue(String.class)),
-                             snapshot.child("profileImage").getValue(String.class));
-                     Log.i("USERRRRR", user.toString());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        return user;
     }
 }

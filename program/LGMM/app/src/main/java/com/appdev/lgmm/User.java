@@ -8,7 +8,6 @@ public class User {
     private String username;
     private String email;
     private String bio;
-    private boolean status;
     private String profileImage;
     private Date dateCreated;
 
@@ -21,24 +20,22 @@ public class User {
         this.username = username;
         this.email = email;
         bio = "";
-        status = true;
         profileImage = "";
         dateCreated = Calendar.getInstance().getTime();
     }
 
-    public User(String userID, String username, String email, String bio, boolean status, String profileImage) {
+    public User(String userID, String username, String email, String bio, String profileImage) {
         this.userID = userID;
         this.username = username;
         this.email = email;
         this.bio = bio;
-        this.status = status;
         this.profileImage = profileImage;
         this.dateCreated = Calendar.getInstance().getTime();
         this.dateCreated = Calendar.getInstance().getTime();
     }
 
     public User(User user) {
-        this(user.userID, user.username, user.email, user.bio, user.status, user.profileImage);
+        this(user.userID, user.username, user.email, user.bio, user.profileImage);
     }
 
     @Override
@@ -80,14 +77,6 @@ public class User {
 
     public void setBio(String bio) {
         this.bio = bio;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
     }
 
     public String getProfileImage() {
