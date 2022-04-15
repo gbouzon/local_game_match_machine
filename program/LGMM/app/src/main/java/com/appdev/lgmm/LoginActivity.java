@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                         verifyUser();
                     }
                     else {
-                        Toast.makeText(getApplicationContext(), "Login Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "User does not exist.", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

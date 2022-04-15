@@ -18,6 +18,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.cometchat.pro.core.CometChat;
+import com.cometchat.pro.exceptions.CometChatException;
+import com.cometchat.pro.models.User;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -47,6 +50,8 @@ public class EditProfileActivity extends AppCompatActivity {
     Button finish;
     Toolbar toolbar;
 
+    private com.cometchat.pro.models.User chatUser;
+
     private DatabaseReference databaseReference;
 
     private Uri imageUri;
@@ -66,6 +71,7 @@ public class EditProfileActivity extends AppCompatActivity {
         username = findViewById(R.id.usernameTextInput);
         bio = findViewById(R.id.bioTextInput);
         userImage = findViewById(R.id.userImage);
+        chatUser = CometChat.getLoggedInUser();
 
         userImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,11 +90,19 @@ public class EditProfileActivity extends AppCompatActivity {
                     bio.setText(snapshot.child(mAuth.getUid()).child("bio").getValue(String.class));
                     Picasso.get().load(Uri.parse(snapshot.child(mAuth.getUid()).child("profileImage")
                             .getValue(String.class))).into(userImage);
+
+                    //comet chat
+                    chatUser.setName(username.getText().toString());
+                    chatUser.setAvatar(snapshot.child(mAuth.getUid()).child("profileImage")
+                            .getValue(String.class));
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
+
+        //updating chat
+        updateChatUser(chatUser);
 
         toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_backbutton);
@@ -174,5 +188,21 @@ public class EditProfileActivity extends AppCompatActivity {
             db.update(map);
             progressDialog.dismiss();
         }
+        //chat User
+        chatUser.setName(username.getText().toString());
+        updateChatUser(chatUser);
+    }
+
+    private void updateChatUser(com.cometchat.pro.models.User user) {
+        CometChat.updateUser(user, Constants.API_KEY, new CometChat.CallbackListener<User>() {
+            @Override
+            public void onSuccess(User user) {
+                Log.i("update success", user.toString());
+            }
+            @Override
+            public void onError(CometChatException e) {
+                Log.i("update error", user.toString() + "error: " + e.getDetails());
+            }
+        });
     }
 }

@@ -138,6 +138,7 @@ public class CreateUserActivity extends AppCompatActivity {
         com.cometchat.pro.models.User chatUser = new com.cometchat.pro.models.User();
         chatUser.setUid(user.getUserID());
         chatUser.setName(user.getUsername());
+        chatUser.setAvatar(user.getProfileImage());
         CometChat.createUser(chatUser, Constants.API_KEY, new CometChat.CallbackListener<com.cometchat.pro.models.User>() {
             @Override
             public void onSuccess(com.cometchat.pro.models.User user) {
@@ -158,7 +159,8 @@ public class CreateUserActivity extends AppCompatActivity {
                 if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
                     if (snapshot.hasChild("image")) {
                         String image = snapshot.child("image").getValue().toString();
-                        Picasso.get().load(image).into(profileImageView);
+                        if (image != null)
+                            Picasso.get().load(image).into(profileImageView);
                     }
                 }
             }
