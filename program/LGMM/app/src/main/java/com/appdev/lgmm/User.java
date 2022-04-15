@@ -7,6 +7,7 @@ public class User {
     private String userID;
     private String username;
     private String email;
+    private String bio;
     private boolean status;
     private String profileImage;
     private Date dateCreated;
@@ -19,9 +20,29 @@ public class User {
         this.userID = userID;
         this.username = username;
         this.email = email;
+        bio = "";
         status = true;
-        profileImage = null;
+        profileImage = "";
         dateCreated = Calendar.getInstance().getTime();
+    }
+
+    public User(String userID, String username, String email, String bio, boolean status, String profileImage) {
+        this.userID = userID;
+        this.username = username;
+        this.email = email;
+        this.bio = bio;
+        this.status = status;
+        this.profileImage = profileImage;
+        this.dateCreated = Calendar.getInstance().getTime();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("User\n" +
+                "UserId: %s\n" +
+                "Username: %s\n" +
+                "Email: %s\n" +
+                "Bio: %s\n", userID, username, email, bio);
     }
 
     public String getUserID() {
@@ -46,6 +67,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public boolean isStatus() {

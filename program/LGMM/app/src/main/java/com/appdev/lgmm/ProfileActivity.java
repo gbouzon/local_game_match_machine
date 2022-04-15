@@ -7,21 +7,38 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 public class ProfileActivity extends AppCompatActivity {
     private Button editProfile;
     private Toolbar toolbar;
+    private TextView username;
+    private TextInputEditText bio;
     private Object Menu;
+    private DAOUser db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        db = new DAOUser();
+        User user = db.getCurrentUser();
+        Log.i("user", user.toString());
+
+        username = findViewById(R.id.usernameTextView);
+        username.setText(user.getUsername());
+
+        bio = findViewById(R.id.bioTextInput);
+        bio.setText(user.getBio());
 
         editProfile = findViewById(R.id.editProfileButton);
         editProfile.setOnClickListener(new View.OnClickListener() {

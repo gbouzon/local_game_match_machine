@@ -59,22 +59,27 @@ public class CreateUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_user);
 
         mAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
-        storageProfilePicsRef = FirebaseStorage.getInstance().getReference().child("Profile Pic");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
+        storageProfilePicsRef = FirebaseStorage.getInstance().getReference().child("profilepic");
 
         profileImageView = findViewById(R.id.userImage);
         username = findViewById(R.id.usernameTextInput);
         email = findViewById(R.id.emailTextInput);
-        finishButton = findViewById(R.id.finishButton); //save button
 
+        Intent intent = getIntent();
+        if (intent.getStringExtra("email") != null)
+            email.setText(intent.getStringExtra("email"));
+
+        finishButton = findViewById(R.id.finishButton); //save button
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadProfileImage();
-                //startActivity(new Intent(CreateUserActivity.this, HomeActivity.class));
+                //uploadProfileImage();
+                createUser();
+                startActivity(new Intent(CreateUserActivity.this, HomeActivity.class));
             }
         });
-
+        /*
         profileImageView.setClickable(true);
         profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,14 +89,20 @@ public class CreateUserActivity extends AppCompatActivity {
         });
 
         getUserInfo();
-
+        */
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
-                Toast.makeText(CreateUserActivity.this, "Please complete your account", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(CreateUserActivity.this, MainActivity.class));
             }
         };
         getOnBackPressedDispatcher().addCallback(this, callback);
+    }
+
+    private void createUser() {
+        DAOUser db = new DAOUser();
+        User user = new User(mAuth.getUid(), username.getText().toString(), email.getText().toString());
+        db.add(user);
     }
 
     private void getUserInfo() {
@@ -121,7 +132,7 @@ public class CreateUserActivity extends AppCompatActivity {
             //imageUri = CropImage.getPickImageResultUriContent(getApplicationContext(), data);
             //CropImage.ActivityResult result = CropImage.getActivityResult(data);
 
-            imageUri = CropImage.getPickImageResultUriContent(getApplicationContext(), data);
+            imageUri = (Uri) CropImage.getPickImageResultUriContent(getApplicationContext(), data);
 //            String uri = imageUri.toString();
 //            uri = "file" + uri.substring(7);
 //            imageUri = Uri.parse(uri);
