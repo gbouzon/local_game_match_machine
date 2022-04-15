@@ -22,7 +22,7 @@ public class FriendProfileActivity extends AppCompatActivity {
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
-                startActivity(new Intent(FriendProfileActivity.this, ChatActivity.class));
+               // startActivity(new Intent(FriendProfileActivity.this, ChatActivity.class));
             }
         };
         getOnBackPressedDispatcher().addCallback(this, callback);
@@ -30,7 +30,7 @@ public class FriendProfileActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        startActivity(new Intent(FriendProfileActivity.this, ChatActivity.class));
+        //startActivity(new Intent(FriendProfileActivity.this, ChatActivity.class));
         return super.onOptionsItemSelected(item);
     }
 }

@@ -12,7 +12,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cometchat.pro.core.AppSettings;
+import com.cometchat.pro.core.CometChat;
+import com.cometchat.pro.exceptions.CometChatException;
 import com.cometchat.pro.uikit.ui_components.cometchat_ui.CometChatUI;
+import com.cometchat.pro.uikit.ui_settings.UIKitSettings;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -40,13 +44,6 @@ public class HomeActivity extends AppCompatActivity {
         cometUserID = mAuth.getUid();
         verifyUser();
 
-        /**
-        //figure out how to logout user from app (auth persistence) once app is closed.
-        if (getIntent().getStringExtra("cometUID") != null) {
-            cometUserID = getIntent().getStringExtra("cometUID");
-        }
-         */
-
         profileButton = findViewById(R.id.profileButton);
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,8 +56,9 @@ public class HomeActivity extends AppCompatActivity {
         chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, ChatActivity.class);
-                //intent.putExtra("cometUID", cometUserID );
+                initCometChat();
+                login();
+                Intent intent = new Intent(HomeActivity.this, CometChatUI.class);
                 startActivity(intent);
             }
         });
@@ -99,5 +97,42 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(HomeActivity.this, "Cancelled", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void initCometChat() {
+        AppSettings appSettings = new AppSettings.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(Constants.REGION).build();
+
+        CometChat.init(this, Constants.APP_ID, appSettings, new CometChat.CallbackListener<String>() {
+            @Override
+            public void onSuccess(String successMessage) {
+                UIKitSettings.setAuthKey(Constants.AUTH_KEY);
+                CometChat.setSource("uikit","android","java");
+                Log.i("comet init", "success");
+            }
+            @Override
+            public void onError(CometChatException e) {
+                Log.i("comet init", "error");
+            }
+        });
+    }
+
+    private void login() {
+        if (CometChat.getLoggedInUser() == null) {
+            CometChat.login(cometUserID, Constants.API_KEY, new CometChat.CallbackListener<com.cometchat.pro.models.User>() {
+                @Override
+                public void onSuccess(com.cometchat.pro.models.User user) {
+                    Log.i("comet login", "success");
+                    startActivity(new Intent(HomeActivity.this, CometChatUI.class));
+                }
+
+                @Override
+                public void onError(CometChatException e) {
+                    Log.i("comet login", "error");
+                }
+            });
+        }
+        else {
+            startActivity(new Intent(HomeActivity.this, CometChatUI.class));
+        }
     }
 }
