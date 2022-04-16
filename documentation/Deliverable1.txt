@@ -1,0 +1,21 @@
+LGMM (Local Game Match Machine)
+Anthony Nadeau - Giuliana Bouzon - Shahe Bannis
+
+For this deliverable, our initial task distribution amongst team members was as follows:
+
+Anthony was to work on the 1st three pages of the app shown in the project presentation. These pages were the initial page, the login and the registration. 
+Finally, Anthony worked on the initial pages as planned (implementing Firebase Authentication), and he also helped with setting up the Firebase Realtime Database, other UI elements, debugging, and setting up the Activity flow.
+
+Shahe was to work on the Main page, the profiles, and the friends list. Finally, he completed the CreateUserActivity that adds users to the Database, and he set up the recyclerView that will be used in the “People Nearby” page. 
+Shahe also helped with debugging and testing.
+
+Giuliana was to work on the chat implementation and connection to the database. 
+Finally she completed exactly that, and assisted in the debugging and testing process with the other 2 members. 
+After a lot of research Giuliana implemented a UI kit and the  Comet Chat API that allows users to chat with eachother. She also connected the chat to the users in the database using the userID from the Firebase Authentication
+
+For the app to work, replace these lines in the Constants.java file (API keys)
+
+String APP_ID = "2073394dd849ad95";
+String AUTH_KEY = "ad053d44ebddca28687e705b929bff1380c30d33";
+String REGION = "us";
+String API_KEY = "582b44faf3403f4695a563e586212427a491cb5b";
