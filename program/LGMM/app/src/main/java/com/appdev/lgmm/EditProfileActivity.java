@@ -78,7 +78,6 @@ public class EditProfileActivity extends AppCompatActivity {
         chatUser = new com.cometchat.pro.models.User();
         chatUser.setUid(mAuth.getUid());
 
-
         userImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
