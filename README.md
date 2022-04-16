@@ -1,4 +1,4 @@
-### Local Game Match Machine
+# Local Game Match Machine
 
 Winter 2022. Repository for Application Development (Mobile) term project.
 
