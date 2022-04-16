@@ -18,9 +18,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.cometchat.pro.core.AppSettings;
 import com.cometchat.pro.core.CometChat;
 import com.cometchat.pro.exceptions.CometChatException;
 import com.cometchat.pro.models.User;
+import com.cometchat.pro.uikit.ui_settings.UIKitSettings;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -71,7 +73,11 @@ public class EditProfileActivity extends AppCompatActivity {
         username = findViewById(R.id.usernameTextInput);
         bio = findViewById(R.id.bioTextInput);
         userImage = findViewById(R.id.userImage);
-        chatUser = CometChat.getLoggedInUser();
+
+        initCometChat();
+        chatUser = new com.cometchat.pro.models.User();
+        chatUser.setUid(mAuth.getUid());
+
 
         userImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,8 +118,8 @@ public class EditProfileActivity extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(EditProfileActivity.this, ProfileActivity.class));
                 uploadProfileImage();
+                startActivity(new Intent(EditProfileActivity.this, ProfileActivity.class));
             }
         });
 
@@ -191,6 +197,23 @@ public class EditProfileActivity extends AppCompatActivity {
         //chat User
         chatUser.setName(username.getText().toString());
         updateChatUser(chatUser);
+    }
+
+    private void initCometChat() {
+        AppSettings appSettings = new AppSettings.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(Constants.REGION).build();
+
+        CometChat.init(this, Constants.APP_ID, appSettings, new CometChat.CallbackListener<String>() {
+            @Override
+            public void onSuccess(String successMessage) {
+                UIKitSettings.setAuthKey(Constants.AUTH_KEY);
+                CometChat.setSource("uikit","android","java");
+                Log.i("comet init", "success");
+            }
+            @Override
+            public void onError(CometChatException e) {
+                Log.i("comet init", "error" + e.getDetails());
+            }
+        });
     }
 
     private void updateChatUser(com.cometchat.pro.models.User user) {
