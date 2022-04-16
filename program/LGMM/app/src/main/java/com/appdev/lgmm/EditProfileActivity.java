@@ -119,6 +119,7 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 uploadProfileImage();
                 startActivity(new Intent(EditProfileActivity.this, ProfileActivity.class));
+                finish();
             }
         });
 
