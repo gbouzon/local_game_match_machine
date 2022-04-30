@@ -41,9 +41,6 @@ public class MainActivity extends AppCompatActivity {
         githubButton = findViewById(R.id.githubButton);
 
         mAuth = FirebaseAuth.getInstance();
-        if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(this, HomeActivity.class));
-        }
 
         emailButton.setOnClickListener(new View.OnClickListener() {
             @Override

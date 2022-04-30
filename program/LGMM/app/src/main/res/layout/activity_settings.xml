@@ -30,8 +30,10 @@
         android:layout_marginVertical="5dp"/>
 
     <TextView
+        android:id="@+id/changeEmailBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
         android:text="Change Email"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -47,8 +49,10 @@
         android:layout_marginVertical="5dp"/>
 
     <TextView
+        android:id="@+id/changePasswordBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
         android:text="Change Password"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -64,8 +68,10 @@
         android:layout_marginVertical="5dp"/>
 
     <TextView
+        android:id="@+id/toggleLocationBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
         android:text="Enable/Disable Location"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -81,8 +87,10 @@
         android:layout_marginVertical="5dp"/>
 
     <TextView
+        android:id="@+id/deleteAccountBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
         android:text="Delete Account"
         android:textSize="26sp"
         android:textStyle="bold"

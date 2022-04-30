@@ -1,19 +1,11 @@
 package com.appdev.lgmm;
 
-import android.util.Log;
 
-import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.Date;
 import java.util.HashMap;
 
 public class DAOUser {
@@ -39,7 +31,8 @@ public class DAOUser {
         return databaseReference.child(key).updateChildren(hashMap);
     }
 
-    public Task<Void> delete(String key) {
+    public Task<Void> delete() {
+        String key = mAuth.getUid();
         return databaseReference.child(key).removeValue();
     }
 }

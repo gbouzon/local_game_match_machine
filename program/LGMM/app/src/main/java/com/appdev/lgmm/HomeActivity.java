@@ -2,8 +2,10 @@ package com.appdev.lgmm;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +22,8 @@ import com.cometchat.pro.uikit.ui_components.cometchat_ui.CometChatUI;
 import com.cometchat.pro.uikit.ui_settings.UIKitSettings;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GithubAuthProvider;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
     CircleImageView profileButton;
     Button nearby;
     String cometUserID;
+    boolean verified;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +50,15 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         mAuth = FirebaseAuth.getInstance();
+
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("User");
         cometUserID = mAuth.getUid();
         verifyUser();
 
         profileButton = findViewById(R.id.profileButton);
+        chatButton = findViewById(R.id.chatButton);
+        nearby = findViewById(R.id.nearbyPlayersButton);
+        verified = emailVerified();
 
         Query retrieveUser = dbRef.orderByChild("userID").equalTo(mAuth.getUid());
         retrieveUser.addValueEventListener(new ValueEventListener() {
@@ -74,24 +83,32 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        chatButton = findViewById(R.id.chatButton);
+
         chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initCometChat();
-                login();
-                Intent intent = new Intent(HomeActivity.this, CometChatUI.class);
-                startActivity(intent);
+                if (!verified)
+                    verified = emailVerified();
+                else {
+                    initCometChat();
+                    login();
+                    Intent intent = new Intent(HomeActivity.this, CometChatUI.class);
+                    startActivity(intent);
+                }
             }
         });
 
-        nearby = findViewById(R.id.nearbyPlayersButton);
+
         nearby.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this, NearbyPlayersActivity.class));
+                if (!verified)
+                    verified = emailVerified();
+                else
+                    startActivity(new Intent(HomeActivity.this, NearbyPlayersActivity.class));
             }
         });
+
 
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
@@ -105,6 +122,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void verifyUser() {
+        mAuth.getCurrentUser().reload();
         String UID = mAuth.getUid();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
         Query checkUser = ref.orderByChild("userID").equalTo(UID);
@@ -173,5 +191,32 @@ public class HomeActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private boolean emailVerified() {
+        mAuth.getCurrentUser().reload();
+        if (mAuth.getCurrentUser().isEmailVerified()) {
+            return true;
+        }
+        else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+            builder.setTitle("Email must be verified").setMessage("Your email has yet to be verified. " +
+                    "Would you like us to send another verification email?").setIcon(R.drawable.ic_verified)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            mAuth.getCurrentUser().sendEmailVerification();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast.makeText(HomeActivity.this, "No verification email sent.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+            builder.create().show();
+        }
+        mAuth.getCurrentUser().reload();
+        return false;
     }
 }

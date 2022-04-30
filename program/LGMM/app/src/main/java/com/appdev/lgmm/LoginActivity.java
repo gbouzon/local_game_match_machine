@@ -81,7 +81,8 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
-                        verifyUser();
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
                     }
                     else {
                         Toast.makeText(getApplicationContext(), "User does not exist.", Toast.LENGTH_SHORT).show();
@@ -89,32 +90,5 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
-    }
-
-    private void verifyUser() {
-        String UID = mAuth.getUid();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
-        Query checkUser = ref.orderByChild("userID").equalTo(UID);
-        checkUser.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-                else {
-                    Intent intent = new Intent(LoginActivity.this, CreateUserActivity.class);
-                    intent.putExtra("email", email.getText().toString());
-                    startActivity(intent);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(LoginActivity.this, "Cancelled", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }

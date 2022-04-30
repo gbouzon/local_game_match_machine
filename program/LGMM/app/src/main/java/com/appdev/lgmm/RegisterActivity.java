@@ -2,8 +2,10 @@ package com.appdev.lgmm;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -74,7 +76,21 @@ public class RegisterActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                        mAuth.signInWithEmailAndPassword(emailText, passwordText);
+                        mAuth.getCurrentUser().sendEmailVerification();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                        builder.setTitle("Email Verification sent").
+                                setMessage("A verification email has been sent to: " + emailText + ". " +
+                                        "You will need to verify your account to use features such as Geolocation, and Chatting.")
+                                .setIcon(R.drawable.ic_verified)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                            }
+                        });
+
+                        builder.create().show();
                     }
                     else {
                         Toast.makeText(getApplicationContext(), "Registration Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
