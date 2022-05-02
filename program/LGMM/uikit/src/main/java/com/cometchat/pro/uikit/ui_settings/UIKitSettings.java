@@ -25,12 +25,12 @@ import java.util.Locale;
 public class UIKitSettings {
 
     //style
-    protected static String UIcolor = "#03A9F4";
+    protected static String UIcolor = "#232359";
     //BottomBar
     private static boolean users = true;
     private static boolean groups = true;
     private static boolean conversations = true;
-    private static boolean calls = true;
+    private static boolean calls = false;
     private static boolean userSettings = true;
 
     private static boolean startConversation = true;
@@ -39,11 +39,11 @@ public class UIKitSettings {
     private static boolean sendMessageInOneOneOne = true;
     private static boolean sendMessageInGroup = true;
 
-    private static boolean userVideoCall = true;
-    private static boolean groupVideoCall = true;
+    private static boolean userVideoCall = false;
+    private static boolean groupVideoCall = false;
 
-    private static boolean userAudioCall = true;
-    private static boolean groupAudioCall = true;
+    private static boolean userAudioCall = false;
+    private static boolean groupAudioCall = false;
 
     private static boolean banMember = true;
     private static boolean kickMember = true;
@@ -57,9 +57,9 @@ public class UIKitSettings {
     private static boolean searchGroup = true;
     private static boolean searchMessage = true;
 
-    private static boolean callRecording = true;
-    private static boolean callLiveStreaming = true;
-    private static boolean callTranscription = true;
+    private static boolean callRecording = false;
+    private static boolean callLiveStreaming = false;
+    private static boolean callTranscription = false;
 
 
     private static boolean hideDeleteMessage = false;
@@ -623,6 +623,7 @@ public class UIKitSettings {
     public static boolean isUsers() {
         return users;
     }
+
 
     public static boolean isGroups() {
         return groups;

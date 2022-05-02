@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -187,7 +188,9 @@ public class CometChatCallActivity extends AppCompatActivity implements View.OnC
         });
         setCallType(isVideo, isIncoming);
         if (!Utils.hasPermissions(this, Manifest.permission.RECORD_AUDIO) && !Utils.hasPermissions(this,Manifest.permission.CAMERA)) {
-            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO,Manifest.permission.CAMERA},REQUEST_PERMISSION);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO,Manifest.permission.CAMERA},REQUEST_PERMISSION);
+            }
         }
     }
 

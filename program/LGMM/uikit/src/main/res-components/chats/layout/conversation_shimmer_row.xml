@@ -60,14 +60,14 @@
             android:layout_height="1dp"/>
 
         <TextView
-            android:background="@color/shimmer"
             android:id="@+id/messageTime"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/txt_user_name"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="16dp"
-            android:textSize="12sp"
-            android:layout_alignTop="@id/txt_user_name"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"/>
+            android:background="@color/shimmer"
+            android:textSize="12sp" />
 
         <com.cometchat.pro.uikit.ui_components.shared.cometchatBadgeCount.CometChatBadgeCount
             android:visibility="visible"

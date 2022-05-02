@@ -16,6 +16,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cometchat.pro.core.CometChat;
+import com.cometchat.pro.exceptions.CometChatException;
+import com.cometchat.pro.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,8 +32,15 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class SettingsActivity extends AppCompatActivity implements ChangeEmailDialog.ChangeEmailDialogListener {
     FirebaseAuth mAuth;
@@ -131,6 +141,7 @@ public class SettingsActivity extends AppCompatActivity implements ChangeEmailDi
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                logout();
                 mAuth.signOut();
                 startActivity(new Intent(SettingsActivity.this, MainActivity.class));
             }
@@ -166,5 +177,21 @@ public class SettingsActivity extends AppCompatActivity implements ChangeEmailDi
                         " Email has not been changed", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void logout() {
+        if (CometChat.getLoggedInUser() != null) {
+            CometChat.logout(new CometChat.CallbackListener<String>() {
+                @Override
+                public void onSuccess(String s) {
+                    Toast.makeText(SettingsActivity.this, "User successfully logged out.", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onError(CometChatException e) {
+
+                }
+            });
+        }
     }
 }

@@ -4,7 +4,6 @@ public enum UserMode {
     ALL_USER("all_users"),
     FRIENDS("friends");
 
-
     private String label;
     UserMode(String label) {
         this.label = label;

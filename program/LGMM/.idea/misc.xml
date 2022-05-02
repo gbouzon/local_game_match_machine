@@ -3,12 +3,98 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/app/src/main/res/drawable/circle.xml" value="0.3385" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/app/src/main/res/drawable/hexagon.xml" value="0.3385" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/app/src/main/res/drawable/hollow_rectangle_black.xml" value="0.3385" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/app/src/main/res/drawable/ic_backbutton.xml" value="0.3385" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/app/src/main/res/drawable/ic_block.xml" value="0.3385" />
         <entry key="..\:/Repos/local_game_match_machine/program/LGMM/app/src/main/res/layout/activity_chat.xml" value="0.3115942028985507" />
         <entry key="..\:/Repos/local_game_match_machine/program/LGMM/app/src/main/res/layout/activity_create_user.xml" value="0.3115942028985507" />
         <entry key="..\:/Repos/local_game_match_machine/program/LGMM/app/src/main/res/layout/activity_edit_profile.xml" value="0.3115942028985507" />
         <entry key="..\:/Repos/local_game_match_machine/program/LGMM/app/src/main/res/layout/activity_friend_profile.xml" value="0.3115942028985507" />
         <entry key="..\:/Repos/local_game_match_machine/program/LGMM/app/src/main/res/layout/activity_home.xml" value="0.3115942028985507" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/app/src/main/res/layout/activity_nearby_players.xml" value="0.3632246376811594" />
         <entry key="..\:/Repos/local_game_match_machine/program/LGMM/app/src/main/res/layout/recycler_nearby_player.xml" value="0.33" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/calls/layout/activity_cometchat_callmanager.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/calls/layout/activity_cometchat_start_call.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/calls/layout/fragment_cometchat_all_call.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/calls/layout/fragment_cometchat_calls.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/calls/layout/fragment_cometchat_missed_call.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/chats/layout/conversation_shimmer.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/chats/layout/conversation_shimmer_row.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/chats/layout/fragment_cometchat_conversationlist.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/cometchatui/layout/activity_cometchat_unified.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/groups/layout/activity_cometchat_ban_members.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/groups/layout/activity_cometchat_group_detail.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/groups/layout/cometchat_update_group_dialog.xml" value="0.18819655521783182" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/groups/layout/fragment_cometchat_add_member.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/groups/layout/fragment_cometchat_admin_moderator_list.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/groups/layout/fragment_cometchat_ban_member.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/groups/layout/fragment_cometchat_create_group.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/groups/layout/fragment_cometchat_grouplist.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/message_action_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/message_left_audio_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/message_left_file_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/message_left_group_call_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/message_left_link_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/message_left_list_image_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/message_left_list_video_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/message_left_polls_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/message_right_reply_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/message_right_sticker_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/message_right_text_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/message_right_whiteboard_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/message_right_writeboard_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/thread_location_message_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/thread_message_audio_layout.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/thread_message_file_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/thread_message_image_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/thread_message_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/thread_message_link_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messagebubbles/layout/thread_message_video_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messages/layout/activity_cometchat_forward_message.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messages/layout/activity_cometchat_media_view.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messages/layout/activity_cometchat_message_info.xml" value="0.33" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messages/layout/activity_cometchat_message_list.xml" value="0.18819655521783182" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messages/layout/activity_cometchat_reaction_info.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messages/layout/cometchat_block_user_message_view.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messages/layout/cometchat_composebox_actions.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messages/layout/cometchat_threadlist_toolbar.xml" value="0.18819655521783182" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messages/layout/fragment_cometchat_message_actions.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messages/layout/fragment_cometchat_messagelist.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messages/layout/fragment_cometchat_thread_message.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/messages/layout/messages_shimmer.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/others/layout/activity_screen.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/others/layout/add_polls_layout.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/others/layout/cometchat_sticker_view.xml" value="0.18819655521783182" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/others/layout/fragment_emoji_objects.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/others/layout/fragment_stickers_view.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/others/layout/group_list_row.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/others/layout/reaction_info_row.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/others/layout/reaction_list_row.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/others/layout/rsc_emoji_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/others/layout/stickers_row.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/shared/layout/cometchat_avatar.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/shared/layout/cometchat_badge_count.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/shared/layout/cometchat_shared_media_video_row.xml" value="0.18819655521783182" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/shared/layout/cometchat_smartreply_row.xml" value="0.18819655521783182" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/shared/layout/fragment_cometchat_shared_media.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/userprofile/layout/activity_cometchat_more_privacy.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/userprofile/layout/fragment_cometchat_user_profile.xml" value="0.33" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/users/drawable/ic_more.xml" value="0.219" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/users/layout/activity_cometchat_user_detail.xml" value="0.18819655521783182" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/users/layout/cometchat_update_user_dialog.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/users/layout/cometchat_user_list_row.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/users/layout/cometchat_userlist_header.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/users/layout/fragment_cometchat_block_user.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/users/layout/fragment_cometchat_userlist.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/users/layout/user_shimmer.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res-components/users/layout/user_shimmer_item.xml" value="0.38697916666666665" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res/layout/activity_comet_chat_start_conversation.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res/layout/new_message_layout.xml" value="0.3632246376811594" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res/menu/cometchat_navigation_bottom.xml" value="0.15648148148148147" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res/menu/cometchat_reaction_nav.xml" value="0.15648148148148147" />
+        <entry key="..\:/Repos/local_game_match_machine/program/LGMM/uikit/src/main/res/menu/group_action_menu.xml" value="0.15648148148148147" />
         <entry key="..\:/Users/Tony/Documents/GitHub/local_game_match_machine/program/LGMM/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.196" />
         <entry key="..\:/Users/Tony/Documents/GitHub/local_game_match_machine/program/LGMM/app/src/main/res/drawable/ic_launcher_background.xml" value="0.196" />
         <entry key="..\:/Users/Tony/Documents/GitHub/local_game_match_machine/program/LGMM/app/src/main/res/drawable/rounded_corners.xml" value="0.276" />
