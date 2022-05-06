@@ -89,10 +89,10 @@
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
         android:layout_gravity="center"
-        android:background="@drawable/hexagon"/>
+        android:layout_marginHorizontal="20dp"/>
 
     <Button
         android:id="@+id/nearbyPlayersButton"

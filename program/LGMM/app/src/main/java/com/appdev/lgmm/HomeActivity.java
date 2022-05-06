@@ -30,6 +30,12 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GithubAuthProvider;
@@ -46,12 +52,14 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
     FirebaseAuth mAuth;
     TextView chatButton;
     CircleImageView profileButton;
     Button nearby;
+    MapView mapView;
+    GoogleMap map;
     boolean verified;
     double longitude, latitude;
 
@@ -77,7 +85,7 @@ public class HomeActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     if (snapshot.child(mAuth.getUid()).child("profileImage").getValue(String.class) != null)
                         Picasso.get().load(Uri.parse(snapshot.child(mAuth.getUid()).child("profileImage")
-                            .getValue(String.class))).into(profileButton);
+                                .getValue(String.class))).into(profileButton);
                 }
             }
 
@@ -126,11 +134,27 @@ public class HomeActivity extends AppCompatActivity {
         //calling the permissions / getCurrentLocation()
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(HomeActivity.this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+            ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_CODE_LOCATION_PERMISSION);
         } else {
             getCurrentLocation();
+            mapView = findViewById(R.id.mapView);
+            initGoogleMap(savedInstanceState);
         }
+    }
+
+    private void initGoogleMap(Bundle savedInstanceState){
+        // *** IMPORTANT ***
+        // MapView requires that the Bundle you pass contain _ONLY_ MapView SDK
+        // objects or sub-Bundles.
+        Bundle mapViewBundle = null;
+        if (savedInstanceState != null) {
+            mapViewBundle = savedInstanceState.getBundle(Constants.MAPVIEW_BUNDLE_KEY);
+        }
+
+        mapView.onCreate(mapViewBundle);
+
+        mapView.getMapAsync(this);
     }
 
     private void verifyUser() {
@@ -156,8 +180,7 @@ public class HomeActivity extends AppCompatActivity {
         mAuth.getCurrentUser().reload();
         if (mAuth.getCurrentUser().isEmailVerified()) {
             return true;
-        }
-        else {
+        } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
             builder.setTitle("Email must be verified").setMessage("Your email has yet to be verified. " +
                     "Would you like us to send another verification email?").setIcon(R.drawable.ic_verified)
@@ -189,7 +212,6 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressWarnings("MissingPermission")
     private void getCurrentLocation() {
 
         LocationRequest locationRequest = new LocationRequest();
@@ -197,6 +219,9 @@ public class HomeActivity extends AppCompatActivity {
         locationRequest.setFastestInterval(3000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
         LocationServices.getFusedLocationProviderClient(HomeActivity.this)
                 .requestLocationUpdates(locationRequest, new LocationCallback() {
                     @Override
@@ -213,5 +238,70 @@ public class HomeActivity extends AppCompatActivity {
 
                     }
                 }, Looper.getMainLooper());
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Bundle mapViewBundle = outState.getBundle(Constants.MAPVIEW_BUNDLE_KEY);
+        if (mapViewBundle == null) {
+            mapViewBundle = new Bundle();
+            outState.putBundle(Constants.MAPVIEW_BUNDLE_KEY, mapViewBundle);
+        }
+
+        mapView.onSaveInstanceState(mapViewBundle);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mapView.onStart();
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        map.setMyLocationEnabled(true);
+        Log.i("TESTING LAT AND LOG", latitude + " " + longitude);
+        LatLng currentLocation = new LatLng(latitude, longitude);
+        map.addMarker(new MarkerOptions().position(currentLocation));
+        map.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
+    }
+
+    @Override
+    public void onPause() {
+        mapView.onPause();
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        mapView.onDestroy();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
     }
 }
