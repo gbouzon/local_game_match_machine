@@ -59,7 +59,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     CircleImageView profileButton;
     Button nearby;
     MapView mapView;
-    GoogleMap map;
     boolean verified;
     double longitude, latitude;
     com.cometchat.pro.models.User cometUser;
