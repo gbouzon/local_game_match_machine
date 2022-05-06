@@ -98,8 +98,6 @@ public class CreateUserActivity extends AppCompatActivity {
 
         getUserInfo();
 
-
-
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
