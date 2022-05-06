@@ -217,7 +217,7 @@ public class CreateUserActivity extends AppCompatActivity {
                 }
             });
         } else {
-            createUser(null);
+            createUser("https://firebasestorage.googleapis.com/v0/b/lgmm-17b5b.appspot.com/o/profilepic%2Fprofile_pic.jpg?alt=media&token=d1b67ae6-718b-4461-bcf2-583568e8a77e");
             progressDialog.dismiss();
             //Toast.makeText(this, "Image not selected", Toast.LENGTH_SHORT).show();
         }
