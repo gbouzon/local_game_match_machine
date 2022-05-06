@@ -62,6 +62,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     GoogleMap map;
     boolean verified;
     double longitude, latitude;
+    com.cometchat.pro.models.User cometUser;
+    AppSettings appSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,11 +74,25 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("User");
         verifyUser();
-
+        appSettings = new AppSettings.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(Constants.REGION).build();
         profileButton = findViewById(R.id.profileButton);
         chatButton = findViewById(R.id.chatButton);
         nearby = findViewById(R.id.nearbyPlayersButton);
         verified = emailVerified();
+
+        CometChat.init(getApplicationContext(), Constants.APP_ID, appSettings, new CometChat.CallbackListener<String>() {
+            @Override
+            public void onSuccess(String successMessage) {
+                UIKitSettings.setAuthKey(Constants.AUTH_KEY);
+                CometChat.setSource("uikit","android","java");
+                Log.i("comet init", "success");
+            }
+            @Override
+            public void onError(CometChatException e) {
+                Log.i("comet init", "error");
+            }
+        });
+        cometUser = CometChat.getLoggedInUser();
 
         Query retrieveUser = dbRef.orderByChild("userID").equalTo(mAuth.getUid());
         retrieveUser.addValueEventListener(new ValueEventListener() {
@@ -126,6 +142,18 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void handleOnBackPressed() {
                 mAuth.signOut();
+                if (cometUser != null)
+                    CometChat.logout(new CometChat.CallbackListener<String>() {
+                        @Override
+                        public void onSuccess(String s) {
+
+                        }
+
+                        @Override
+                        public void onError(CometChatException e) {
+
+                        }
+                    });
                 startActivity(new Intent(HomeActivity.this, MainActivity.class));
             }
         };

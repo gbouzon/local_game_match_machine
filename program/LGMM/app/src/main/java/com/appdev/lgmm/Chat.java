@@ -38,6 +38,7 @@ import com.cometchat.pro.constants.CometChatConstants;
 import com.cometchat.pro.core.AppSettings;
 import com.cometchat.pro.core.Call;
 import com.cometchat.pro.core.CometChat;
+import com.cometchat.pro.core.ConversationsRequest;
 import com.cometchat.pro.exceptions.CometChatException;
 import com.cometchat.pro.models.BaseMessage;
 import com.cometchat.pro.models.Conversation;
@@ -139,8 +140,6 @@ public class Chat extends AppCompatActivity implements
         if (!CometChatCallListener.isInitialized)
             CometChatCallListener.addCallListener(TAG,this);
 
-        //EmojiCompat.Config config = new BundledEmojiCompatConfig(getApplicationContext());
-       // EmojiCompat.init(config);
         activityCometChatUnifiedBinding = DataBindingUtil.setContentView(this, R.layout.activity_cometchat_unified);
         initViewComponent();
         // It performs action on click of user item in CometChatUserListScreen.
@@ -157,7 +156,6 @@ public class Chat extends AppCompatActivity implements
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
-                logout();
                 startActivity(new Intent(Chat.this, HomeActivity.class));
             }
         };
@@ -167,7 +165,7 @@ public class Chat extends AppCompatActivity implements
     private void initCometChat() {
         AppSettings appSettings = new AppSettings.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(Constants.REGION).build();
 
-        CometChat.init(this, Constants.APP_ID, appSettings, new CometChat.CallbackListener<String>() {
+        CometChat.init(activity.getApplicationContext(), Constants.APP_ID, appSettings, new CometChat.CallbackListener<String>() {
             @Override
             public void onSuccess(String successMessage) {
                 UIKitSettings.setAuthKey(Constants.AUTH_KEY);
@@ -309,7 +307,6 @@ public class Chat extends AppCompatActivity implements
                 isGroupsListVisible = booleanVal;
                 activityCometChatUnifiedBinding.bottomNavigation.getMenu().findItem(R.id.menu_group)
                         .setVisible(booleanVal);
-
             }
         });
 
@@ -602,7 +599,6 @@ public class Chat extends AppCompatActivity implements
     protected void onStart() {
         super.onStart();
         addConversationListener();    //Enable Listener when app starts
-
     }
 
     @Override
@@ -637,4 +633,22 @@ public class Chat extends AppCompatActivity implements
         resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
+    private void fetchRecents() {
+        ConversationsRequest conversationRequest = new ConversationsRequest.ConversationsRequestBuilder()
+                .setLimit(4)
+                .setConversationType(CometChatConstants.CONVERSATION_TYPE_USER)
+                .build();
+
+        conversationRequest.fetchNext(new CometChat.CallbackListener<List<Conversation>>() {
+            @Override
+            public void onSuccess(List<Conversation> conversations) {
+
+            }
+
+            @Override
+            public void onError(CometChatException e) {
+
+            }
+        });
+    }
 }
