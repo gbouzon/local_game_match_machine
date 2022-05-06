@@ -281,9 +281,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             return;
         }
         map.setMyLocationEnabled(true);
-        Log.i("TESTING LAT AND LOG", latitude + " " + longitude);
         LatLng currentLocation = new LatLng(latitude, longitude);
-        map.addMarker(new MarkerOptions().position(currentLocation));
         map.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
     }
 
